@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7-Week Training Schedule</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0f1117;
+    --surface: #181c26;
+    --surface2: #1e2330;
+    --border: rgba(255,255,255,0.08);
+    --border-hover: rgba(255,255,255,0.15);
+    --text: #e8eaf0;
+    --muted: #8a8fa8;
+    --dim: #545870;
+
+    --purple: #7c6af7;
+    --purple-dim: rgba(124,106,247,0.12);
+    --teal: #2dd4aa;
+    --teal-dim: rgba(45,212,170,0.1);
+    --amber: #f5a623;
+    --amber-dim: rgba(245,166,35,0.12);
+    --rose: #f06292;
+    --rose-dim: rgba(240,98,146,0.1);
+    --blue: #4fa3e3;
+    --blue-dim: rgba(79,163,227,0.1);
+    --green: #66bb6a;
+    --green-dim: rgba(102,187,106,0.1);
+    --gray: #6e7280;
+    --gray-dim: rgba(110,114,128,0.12);
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* Header */
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 3rem 2rem 2.5rem;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .header-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--purple);
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  header h1 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+
+  header h1 span {
+    color: var(--purple);
+  }
+
+  .header-sub {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 2rem;
+  }
+
+  /* Tips strip */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+    margin-top: 1.5rem;
+  }
+
+  .tip-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .tip-card .tip-icon {
+    font-size: 16px;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .tip-card strong {
+    color: var(--text);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  /* Main layout */
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  /* Progress bar */
+  .progress-row {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 2rem;
+    align-items: center;
+  }
+
+  .progress-seg {
+    flex: 1;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--surface2);
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .progress-seg.active { opacity: 1; }
+  .progress-seg:not(.active) { opacity: 0.4; }
+
+  /* Week card */
+  .week-card {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    background: var(--surface);
+    transition: border-color 0.2s;
+  }
+
+  .week-card:hover { border-color: var(--border-hover); }
+
+  .week-card.open {
+    border-color: var(--week-accent, var(--purple));
+  }
+
+  .week-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 18px;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .wk-dot {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    flex-shrink: 0;
+    background: var(--week-dim);
+    color: var(--week-accent);
+    border: 1px solid var(--week-accent);
+    opacity: 0.85;
+  }
+
+  .week-card.open .wk-dot { opacity: 1; }
+
+  .wk-info { flex: 1; min-width: 0; }
+
+  .wk-info h2 {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 2px;
+  }
+
+  .wk-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .wk-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  .badge-sme { background: rgba(245,166,35,0.15); color: var(--amber); }
+  .badge-hard { background: rgba(240,98,146,0.15); color: var(--rose); }
+  .badge-assess { background: rgba(102,187,106,0.15); color: var(--green); }
+
+  .wk-chevron {
+    color: var(--dim);
+    font-size: 18px;
+    flex-shrink: 0;
+    transition: transform 0.25s;
+    line-height: 1;
+  }
+
+  .week-card.open .wk-chevron { transform: rotate(180deg); }
+
+  /* Body */
+  .week-body {
+    display: none;
+    border-top: 1px solid var(--border);
+  }
+
+  .week-card.open .week-body { display: block; }
+
+  .day-list { border-bottom: 1px solid var(--border); }
+
+  .day-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .day-item:last-child { border-bottom: none; }
+
+  .day-left {
+    padding: 11px 14px;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid var(--border);
+  }
+
+  .day-name {
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  .day-type {
+    font-size: 11px;
+    color: var(--dim);
+  }
+
+  .day-right {
+    padding: 11px 16px;
+    font-size: 13.5px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    line-height: 1.5;
+  }
+
+  .day-right .task-text { flex: 1; min-width: 180px; }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .tag-sme { background: rgba(245,166,35,0.15); color: var(--amber); }
+  .tag-quiz { background: rgba(102,187,106,0.15); color: var(--green); }
+  .tag-rest { background: var(--surface2); color: var(--dim); }
+
+  /* Weekend rows */
+  .day-item.weekend .day-left { background: var(--surface2); }
+  .day-item.weekend .day-name { color: var(--purple); }
+
+  /* Week footer note */
+  .week-note {
+    padding: 10px 18px;
+    font-size: 12.5px;
+    color: var(--dim);
+    line-height: 1.5;
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+  }
+
+  .note-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--week-accent);
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
+  /* Timeline sidebar line */
+  .timeline-wrap {
+    position: relative;
+  }
+
+  /* Footer */
+  footer {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem 3rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: var(--dim);
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .footer-legend {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  @media (max-width: 600px) {
+    header, main { padding: 1.5rem 1rem; }
+    .day-item { grid-template-columns: 64px 1fr; }
+    .wk-info h2 { font-size: 14px; }
+    .tips-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="header-eyebrow">Full-Stack .NET + Angular · Bootcamp</p>
+  <h1>Your <span>7-week</span> training plan</h1>
+  <p class="header-sub">Click any week to expand the daily schedule. 100% SME attendance required.</p>
+
+  <div class="tips-grid">
+    <div class="tip-card">
+      <span class="tip-icon">⏱</span>
+      <strong>Daily habit</strong>
+      2 hrs weekdays · 3–4 hrs weekends = 10–12 hrs/week
+    </div>
+    <div class="tip-card">
+      <span class="tip-icon">⚠️</span>
+      <strong>Hardest stretch</strong>
+      Weeks 3–4 (EF Core + Web API) — don't skip hands-on exercises
+    </div>
+    <div class="tip-card">
+      <span class="tip-icon">🕐</span>
+      <strong>Most time-consuming</strong>
+      Angular in weeks 5–6 — don't fall behind going in
+    </div>
+    <div class="tip-card">
+      <span class="tip-icon">📋</span>
+      <strong>Week 7 rule</strong>
+      Revision only. Use quiz links from the handbook — no new topics
+    </div>
+    <div class="tip-card">
+      <span class="tip-icon">📅</span>
+      <strong>SME sessions</strong>
+      Mark as non-negotiable. 100% attendance required
+    </div>
+  </div>
+</header>
+
+<main>
+  <div id="weeks"></div>
+</main>
+
+<footer>
+  <span>7 weeks · ~80 hours total</span>
+  <div class="footer-legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#f5a623"></div> SME session</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#66bb6a"></div> Quiz / revision</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#7c6af7"></div> Weekend</div>
+  </div>
+</footer>
+
+<script>
+const weeks = [
+  {
+    num: 1, topic: "C# Fundamentals & OOP",
+    accent: "#7c6af7", dim: "rgba(124,106,247,0.12)",
+    note: "Build strong OOP habits here — everything later depends on it.",
+    days: [
+      { day: "Mon", tasks: "C# syntax review: types, control flow, methods, exceptions" },
+      { day: "Tue", tasks: "OOP: classes, inheritance, polymorphism, interfaces" },
+      { day: "Wed", tasks: "Generics, collections (List, Dictionary), LINQ basics" },
+      { day: "Thu", tasks: "Delegates, events, lambda expressions, async/await intro" },
+      { day: "Fri", tasks: "Hands-on: build a small console app applying OOP concepts" },
+      { day: "Sat", tasks: "Design Patterns intro: Singleton, Factory, Repository", weekend: true },
+      { day: "Sun", tasks: "Review + quiz practice on C# fundamentals; prep for week 2", weekend: true },
+    ]
+  },
+  {
+    num: 2, topic: "SQL Server & Database Design",
+    accent: "#2dd4aa", dim: "rgba(45,212,170,0.10)",
+    note: "Focus on clean, efficient queries — you'll use these heavily with EF Core in week 3.",
+    days: [
+      { day: "Mon", tasks: "Relational DB concepts, normalization, ER diagrams" },
+      { day: "Tue", tasks: "SQL: SELECT, JOINs, GROUP BY, subqueries, CTEs" },
+      { day: "Wed", tasks: "Stored procedures, views, indexes, transactions" },
+      { day: "Thu", tasks: "SME session + Q&A", sme: true },
+      { day: "Fri", tasks: "Hands-on: design and query a sample database schema" },
+      { day: "Sat", tasks: "Advanced SQL: window functions, performance tuning basics", weekend: true },
+      { day: "Sun", tasks: "Review week 2 + mini quiz; preview EF Core concepts", weekend: true },
+    ]
+  },
+  {
+    num: 3, topic: "EF Core & Data Access",
+    accent: "#f06292", dim: "rgba(240,98,146,0.10)",
+    hard: true,
+    note: "Technically hardest week — do not skip the hands-on exercises.",
+    days: [
+      { day: "Mon", tasks: "EF Core setup: DbContext, migrations, code-first approach" },
+      { day: "Tue", tasks: "Relationships: one-to-many, many-to-many, fluent API" },
+      { day: "Wed", tasks: "LINQ with EF Core: querying, filtering, eager/lazy loading" },
+      { day: "Thu", tasks: "SME session + hands-on EF Core exercise", sme: true },
+      { day: "Fri", tasks: "Repository pattern with EF Core; unit of work pattern" },
+      { day: "Sat", tasks: "Hands-on: full CRUD app using EF Core + SQL Server", weekend: true },
+      { day: "Sun", tasks: "Review + troubleshoot exercises; prep for Web API week", weekend: true },
+    ]
+  },
+  {
+    num: 4, topic: "ASP.NET Core Web API",
+    accent: "#4fa3e3", dim: "rgba(79,163,227,0.10)",
+    hard: true,
+    note: "Master REST principles and dependency injection before moving on.",
+    days: [
+      { day: "Mon", tasks: "ASP.NET Core intro: middleware, dependency injection, routing" },
+      { day: "Tue", tasks: "Building REST APIs: controllers, action methods, status codes" },
+      { day: "Wed", tasks: "Request/response: model binding, validation, DTOs, AutoMapper" },
+      { day: "Thu", tasks: "SME session + API design Q&A", sme: true },
+      { day: "Fri", tasks: "Authentication: JWT, claims, securing endpoints" },
+      { day: "Sat", tasks: "Hands-on: full REST API wired to EF Core + SQL Server", weekend: true },
+      { day: "Sun", tasks: "Testing APIs with Swagger / Postman; review week 4", weekend: true },
+    ]
+  },
+  {
+    num: 5, topic: "Angular — Foundations",
+    accent: "#f06292", dim: "rgba(240,98,146,0.10)",
+    note: "Most time-consuming module — don't fall behind entering this week.",
+    days: [
+      { day: "Mon", tasks: "Angular CLI, project structure, modules, component lifecycle" },
+      { day: "Tue", tasks: "Templates: data binding, directives (ngIf, ngFor), pipes" },
+      { day: "Wed", tasks: "Services, dependency injection, HTTP client, RxJS basics" },
+      { day: "Thu", tasks: "SME session + Angular architecture Q&A", sme: true },
+      { day: "Fri", tasks: "Routing: lazy loading, route guards, nested routes" },
+      { day: "Sat", tasks: "Hands-on: multi-page Angular app consuming your .NET API", weekend: true },
+      { day: "Sun", tasks: "Forms: template-driven vs reactive forms; validation", weekend: true },
+    ]
+  },
+  {
+    num: 6, topic: "Angular Advanced + GenAI",
+    accent: "#66bb6a", dim: "rgba(102,187,106,0.10)",
+    note: "Finish Angular strong, then pivot to GenAI concepts for KBA prep.",
+    days: [
+      { day: "Mon", tasks: "State management: NgRx basics or lightweight service state" },
+      { day: "Tue", tasks: "Angular testing: unit tests with Jasmine/Karma, TestBed" },
+      { day: "Wed", tasks: "GenAI fundamentals: LLMs, prompting, RAG, responsible AI" },
+      { day: "Thu", tasks: "SME session + GenAI use-case discussion", sme: true },
+      { day: "Fri", tasks: "Integrating GenAI APIs into .NET / Angular apps" },
+      { day: "Sat", tasks: "Hands-on: end-to-end full-stack project (Angular + Web API + EF Core)", weekend: true },
+      { day: "Sun", tasks: "Project wrap-up + self-review of weeks 1–6", weekend: true },
+    ]
+  },
+  {
+    num: 7, topic: "Revision & KBA Assessment",
+    accent: "#6e7280", dim: "rgba(110,114,128,0.12)",
+    assess: true,
+    note: "No new topics. Use quiz links from the handbook for Angular, GenAI, and Design Patterns.",
+    days: [
+      { day: "Mon", tasks: "Revise C#, OOP, Design Patterns; complete handbook quizzes", quiz: true },
+      { day: "Tue", tasks: "Revise EF Core, SQL Server, Web API concepts", quiz: true },
+      { day: "Wed", tasks: "Revise Angular (all modules) using handbook quiz links", quiz: true },
+      { day: "Thu", tasks: "Revise GenAI + mock KBA practice session", quiz: true },
+      { day: "Fri", tasks: "Final SME session / last Q&A before assessment", sme: true },
+      { day: "Sat", tasks: "Full mock KBA run-through; identify weak areas", weekend: true, quiz: true },
+      { day: "Sun", tasks: "Light review only — rest, confidence, prepare for KBA", weekend: true, rest: true },
+    ]
+  }
+];
+
+const container = document.getElementById('weeks');
+
+weeks.forEach((w, i) => {
+  const card = document.createElement('div');
+  card.className = 'week-card';
+  card.style.setProperty('--week-accent', w.accent);
+  card.style.setProperty('--week-dim', w.dim);
+
+  const badges = [];
+  if (w.hard) badges.push(`<span class="wk-badge badge-hard">⚠ Hardest</span>`);
+  if (w.assess) badges.push(`<span class="wk-badge badge-assess">✓ Assessment</span>`);
+  const hasSme = w.days.some(d => d.sme);
+  if (hasSme) badges.push(`<span class="wk-badge badge-sme">SME this week</span>`);
+
+  const daysHtml = w.days.map(d => {
+    const isWeekend = d.weekend ? 'weekend' : '';
+    const dayType = d.weekend ? 'Weekend' : 'Weekday';
+    const tags = [];
+    if (d.sme) tags.push(`<span class="tag tag-sme">SME</span>`);
+    if (d.quiz) tags.push(`<span class="tag tag-quiz">Quiz</span>`);
+    if (d.rest) tags.push(`<span class="tag tag-rest">Rest</span>`);
+
+    return `<div class="day-item ${isWeekend}">
+      <div class="day-left">
+        <span class="day-name">${d.day}</span>
+        <span class="day-type">${dayType}</span>
+      </div>
+      <div class="day-right">
+        <span class="task-text">${d.tasks}</span>
+        ${tags.join('')}
+      </div>
+    </div>`;
+  }).join('');
+
+  card.innerHTML = `
+    <div class="week-header" role="button" aria-expanded="false" tabindex="0">
+      <div class="wk-dot">W${w.num}</div>
+      <div class="wk-info">
+        <h2>${w.topic}</h2>
+        <div class="wk-meta">
+          <span>10–12 hrs</span>
+          ${badges.join('')}
+        </div>
+      </div>
+      <span class="wk-chevron">⌄</span>
+    </div>
+    <div class="week-body">
+      <div class="day-list">${daysHtml}</div>
+      <div class="week-note">
+        <div class="note-dot"></div>
+        <span>${w.note}</span>
+      </div>
+    </div>
+  `;
+
+  const header = card.querySelector('.week-header');
+  const toggle = () => {
+    const isOpen = card.classList.contains('open');
+    card.classList.toggle('open', !isOpen);
+    header.setAttribute('aria-expanded', String(!isOpen));
+  };
+  header.addEventListener('click', toggle);
+  header.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+  });
+
+  container.appendChild(card);
+});
+
+// Open week 1 by default
+document.querySelector('.week-card .week-header').click();
+</script>
+</body>
+</html>
