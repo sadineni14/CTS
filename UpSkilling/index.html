@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Community Event Portal — CSS3 Exercises</title>
+
+  <!-- Exercise 5: Google Font via <link> -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
+
+  <!-- Exercise 1: Internal (Embedded) CSS — body background override for demo -->
+  <style>
+    /* Exercise 1: Inline style demo is on the h1 below in HTML */
+    /* This embedded block sets a body background (Exercise 1) */
+    body {
+      background-color: #eef2ff; /* fallback before external CSS loads */
+    }
+    /* Exercise 8: Visibility demo */
+    .vis-demo-hidden  { visibility: hidden; }
+    .vis-demo-none    { display: none; }
+  </style>
+
+  <!-- Exercise 1: External Stylesheet linked here -->
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+  <!-- ===================== HEADER ===================== -->
+  <!-- Exercise 3: ID selector #mainHeader | Exercise 4: gradient background in CSS -->
+  <header id="mainHeader">
+    <!-- Exercise 1: inline style making heading red (demo) -->
+    <h1 style="color: #ffeb3b;">🏙️ Local Community Event Portal</h1>
+    <p>Connecting residents to city events — CSS3 Exercises Demo</p>
+  </header>
+
+  <!-- ===================== NAVIGATION ===================== -->
+  <!-- Exercise 6: :link :hover :active :visited | list-style-type none | padding/margin -->
+  <nav>
+    <ul>
+      <li><a href="#ex1">Ex 1</a></li>
+      <li><a href="#ex3">Selectors</a></li>
+      <li><a href="#ex4">Colors</a></li>
+      <li><a href="#ex5">Typography</a></li>
+      <li><a href="#ex6">Links &amp; Lists</a></li>
+      <li><a href="#ex7">Tables</a></li>
+      <li><a href="#ex8">Box Model</a></li>
+      <li><a href="#ex9">Columns</a></li>
+      <li><a href="#ex10">Responsive</a></li>
+      <li><a href="help.html" target="_blank">Help ↗</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <!-- ===================== EXERCISE 1 ===================== -->
+    <section id="ex1">
+      <h2>Exercise 1 — Inline vs Internal vs External CSS</h2>
+      <p class="description-text">
+        This page uses all three CSS methods:
+      </p>
+      <ul class="event-list">
+        <li><strong>Inline:</strong> The <code>&lt;h1&gt;</code> above has <code>style="color:#ffeb3b"</code></li>
+        <li><strong>Internal:</strong> The <code>&lt;style&gt;</code> block in <code>&lt;head&gt;</code> sets body background</li>
+        <li><strong>External:</strong> <code>styles.css</code> is linked via <code>&lt;link&gt;</code> and contains all reusable rules</li>
+      </ul>
+      <!-- Exercise 1: inline red heading demo -->
+      <h3 style="color: red; margin-top:10px;">← This h3 is red via inline style</h3>
+    </section>
+
+    <!-- ===================== EXERCISE 2 ===================== -->
+    <section id="ex2">
+      <h2>Exercise 2 — CSS Syntax &amp; Comments</h2>
+      <p class="description-text">
+        The external <code>styles.css</code> file uses well-structured rules with consistent
+        indentation and descriptive comments above every selector group.
+        Example from the file:
+      </p>
+      <pre style="background:#f4f4f4;padding:14px;border-radius:6px;font-size:0.88rem;overflow:auto;">
+/* Style for main CTA button */
+.cta-button {
+    background-color: #007BFF;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 6px;
+}</pre>
+      <a href="#" class="cta-button">Register Now</a>
+      <a href="#" class="cta-button secondary" style="margin-left:8px;">Learn More</a>
+    </section>
+
+    <!-- ===================== EXERCISE 3 ===================== -->
+    <section id="ex3">
+      <h2>Exercise 3 — Selectors Playground</h2>
+
+      <!-- Universal * already applied via styles.css -->
+      <p class="description-text">
+        ✅ <strong>Universal selector <code>*</code></strong> — resets margin &amp; padding (see styles.css)<br/>
+        ✅ <strong>Element selector</strong> — all <code>h2</code> elements styled with blue + border-bottom<br/>
+        ✅ <strong>ID selector</strong> — <code>#mainHeader</code> has gradient background<br/>
+        ✅ <strong>Class selector</strong> — <code>.eventCard</code> shown below<br/>
+        ✅ <strong>Grouping selector</strong> — <code>h3, p</code> share line-height and margin rules
+      </p>
+
+      <!-- Class selector: .eventCard -->
+      <div class="eventCard">
+        <h3>🎤 Tech Innovators Meetup</h3>
+        <p class="description-text">A meetup for tech enthusiasts in New York. Join us for talks, networking, and demos.</p>
+        <span class="badge upcoming">Upcoming</span>
+      </div>
+
+      <div class="eventCard">
+        <h3>🤖 AI &amp; ML Conference</h3>
+        <p class="description-text">Deep dive into the latest advancements in AI and machine learning. Chicago.</p>
+        <span class="badge completed">Completed</span>
+      </div>
+
+      <div class="eventCard">
+        <h3>💻 Frontend Development Bootcamp</h3>
+        <p class="description-text">Hands-on frontend training in Los Angeles. HTML5, CSS3, JavaScript, and more.</p>
+        <span class="badge upcoming">Upcoming</span>
+      </div>
+
+      <!-- Highlight class demo -->
+      <p>Don't miss the <span class="highlight">Early Bird Offer!</span></p>
+    </section>
+
+    <!-- ===================== EXERCISE 4 ===================== -->
+    <section id="ex4">
+      <h2>Exercise 4 — Color &amp; Background Styling</h2>
+
+      <div class="section-gradient-header">🎨 City Council Brand Colors — Section Header (linear-gradient)</div>
+
+      <div class="rgba-box" style="margin-top:14px;">
+        <strong>RGBA Color Box:</strong> background: <code>rgba(26, 115, 232, 0.12)</code>
+      </div>
+
+      <div style="margin-top:10px; padding:12px; background-color:#0d47a1; color:white; border-radius:6px;">
+        <strong>HEX Color:</strong> background: <code>#0d47a1</code> (Primary blue)
+      </div>
+
+      <div style="margin-top:10px; padding:12px; background: linear-gradient(90deg,#ff6f00,#ffd600); border-radius:6px; color:#333;">
+        <strong>Warm Gradient:</strong> <code>linear-gradient(90deg, #ff6f00, #ffd600)</code>
+      </div>
+    </section>
+
+    <!-- ===================== EXERCISE 5 ===================== -->
+    <section id="ex5">
+      <h2>Exercise 5 — Typography: Fonts &amp; Text</h2>
+
+      <!-- Google Font applied via styles.css @link in head -->
+      <p class="section-title">Community Bulletin Board</p>
+
+      <p class="description-text">
+        This paragraph uses the <strong>Poppins</strong> Google Font (imported via
+        <code>&lt;link&gt;</code>), with <code>font-size: 0.97rem</code>,
+        <code>letter-spacing: 0.3px</code>, <code>line-height: 1.8</code>,
+        and <code>text-align: justify</code>. Good typography improves readability
+        and engagement across the portal.
+      </p>
+
+      <p style="font-family:'Georgia',serif; font-style:italic; font-size:1.05rem; color:#555; margin-top:10px;">
+        ← Italic serif paragraph using <code>font-style: italic</code> and <code>font-family: Georgia</code>
+      </p>
+
+      <p style="text-transform:uppercase; letter-spacing:4px; font-weight:700; color:#0d47a1; margin-top:10px;">
+        uppercase text with letter-spacing
+      </p>
+    </section>
+
+    <!-- ===================== EXERCISE 6 ===================== -->
+    <section id="ex6">
+      <h2>Exercise 6 — Link &amp; List Styling</h2>
+
+      <h3>Styled Links (hover/active/visited via CSS)</h3>
+      <p>
+        <a href="#ex3">Internal link (hover me)</a> &nbsp;|&nbsp;
+        <a href="https://www.example.com" target="_blank">External link (visited turns purple)</a>
+      </p>
+
+      <h3 style="margin-top:16px;">Bulleted Event List</h3>
+      <ul class="event-list">
+        <li>Tech Innovators Meetup — June 10</li>
+        <li>AI &amp; ML Conference — May 15</li>
+        <li>Frontend Bootcamp — July 1–3</li>
+      </ul>
+
+      <h3 style="margin-top:16px;">Ordered Steps List</h3>
+      <ol class="steps-list">
+        <li>Visit the portal</li>
+        <li>Select an event</li>
+        <li>Fill in the registration form</li>
+        <li>Receive your confirmation email</li>
+      </ol>
+
+      <h3 style="margin-top:16px;">No-Bullet Navigation List</h3>
+      <ul class="no-bullet">
+        <li style="padding:4px 0; color:#0d47a1;">→ Home</li>
+        <li style="padding:4px 0; color:#0d47a1;">→ Events</li>
+        <li style="padding:4px 0; color:#0d47a1;">→ Contact</li>
+      </ul>
+    </section>
+
+    <!-- ===================== EXERCISE 7 ===================== -->
+    <section id="ex7">
+      <h2>Exercise 7 — Table Styling</h2>
+      <table>
+        <caption>Community Events — Admin Overview</caption>
+        <thead>
+          <tr>
+            <th>Event</th>
+            <th>City</th>
+            <th>Date</th>
+            <th>Registrations</th>
+            <th>Avg Rating</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Tech Innovators Meetup</td>
+            <td>New York</td>
+            <td>Jun 10, 2025</td>
+            <td>2</td>
+            <td>3.0</td>
+            <td><span class="badge upcoming">Upcoming</span></td>
+          </tr>
+          <tr>
+            <td>AI &amp; ML Conference</td>
+            <td>Chicago</td>
+            <td>May 15, 2025</td>
+            <td>2</td>
+            <td>4.5</td>
+            <td><span class="badge completed">Completed</span></td>
+          </tr>
+          <tr>
+            <td>Frontend Bootcamp</td>
+            <td>Los Angeles</td>
+            <td>Jul 1–3, 2025</td>
+            <td>1</td>
+            <td>N/A</td>
+            <td><span class="badge upcoming">Upcoming</span></td>
+          </tr>
+          <tr>
+            <td>Community Health Fair</td>
+            <td>New York</td>
+            <td>Aug 5, 2025</td>
+            <td>0</td>
+            <td>N/A</td>
+            <td><span class="badge cancelled">Cancelled</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:0.85rem;color:#666;">
+        ↑ Even rows use zebra striping via <code>tbody tr:nth-child(even)</code>. 
+        Table uses <code>border-collapse: collapse</code> and <code>text-align: center</code>.
+      </p>
+    </section>
+
+    <!-- ===================== EXERCISE 8 ===================== -->
+    <section id="ex8">
+      <h2>Exercise 8 — Box Model &amp; Layout Control</h2>
+
+      <p class="description-text">
+        The <code>.eventCard</code> below demonstrates <code>border</code>, <code>padding</code>,
+        and <code>margin</code>. Focused form fields have an <code>outline</code>.
+      </p>
+
+      <div class="eventCard" style="max-width:360px;">
+        <h3>📌 Box Model Demo Card</h3>
+        <p>border: 2px solid | padding: 20px | margin: 16px | box-shadow applied</p>
+      </div>
+
+      <!-- Outline on form input demo -->
+      <label style="display:block;margin-top:14px;font-weight:600;">Form field with outline on focus:</label>
+      <input type="text" placeholder="Click to see outline..."
+             style="padding:9px;border:1px solid #aaa;border-radius:6px;width:280px;margin-top:5px;"
+             onfocus="this.style.outline='3px solid #1a73e8'"
+             onblur="this.style.outline='none'"/>
+
+      <!-- visibility: hidden vs display: none -->
+      <div style="margin-top:20px; display:flex; gap:16px; flex-wrap:wrap;">
+        <div style="background:#fff3cd;padding:12px;border-radius:6px;border:1px solid #ffc107;">
+          <strong>visibility: hidden</strong><br/>
+          <span class="vis-demo-hidden">I am invisible but take space</span>
+          <span style="color:#888;font-size:0.85rem;">(blank space above = visibility:hidden element)</span>
+        </div>
+        <div style="background:#fce4ec;padding:12px;border-radius:6px;border:1px solid #f48fb1;">
+          <strong>display: none</strong><br/>
+          <span class="vis-demo-none">I am completely removed</span>
+          <span style="color:#888;font-size:0.85rem;">(no space = display:none removes from layout)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== EXERCISE 9 ===================== -->
+    <section id="ex9">
+      <h2>Exercise 9 — Multi-Column Text Layout</h2>
+      <article class="news-article">
+        <h3>Community Bulletin — May 2025</h3>
+        <p>
+          The city council is proud to announce a series of exciting community events this summer.
+          From technology meetups to health fairs, there is something for every resident.
+          Join us and connect with your neighbours in meaningful ways.
+        </p>
+        <p>
+          Our flagship event, the Tech Innovators Meetup, returns to New York on June 10th.
+          This year features keynote speakers from leading tech firms, interactive demos,
+          and networking sessions open to all experience levels.
+        </p>
+        <p>
+          The AI and Machine Learning Conference, held in Chicago, concluded last month
+          with record attendance. Feedback from participants praised the quality of speakers
+          and the relevance of topics to current industry trends.
+        </p>
+        <p>
+          Looking ahead, the Frontend Development Bootcamp in Los Angeles promises three days
+          of intensive hands-on training covering HTML5, CSS3, JavaScript, and modern frameworks.
+          Early bird registrations are still open — don't miss your chance!
+        </p>
+        <p>
+          The city is also exploring new venues and partnerships to expand our event calendar
+          through the rest of 2025 and into 2026. Stay tuned to this portal for the latest updates,
+          resource links, and registration opportunities as they become available.
+        </p>
+      </article>
+    </section>
+
+    <!-- ===================== EXERCISE 10 ===================== -->
+    <section id="ex10">
+      <h2>Exercise 10 — Responsive Web Design</h2>
+      <p class="description-text">
+        Resize your browser window or use Chrome DevTools Device Toolbar to test responsiveness.
+        Key breakpoints:
+      </p>
+      <ul class="event-list">
+        <li><strong>≤ 992px (Tablet):</strong> max-width becomes 100%, header font shrinks</li>
+        <li><strong>≤ 768px (Mobile):</strong> nav stacks vertically, images &amp; fonts shrink, 1-column layout</li>
+        <li><strong>≤ 480px (Small mobile):</strong> buttons go full-width, tighter padding</li>
+      </ul>
+
+      <!-- Flexbox responsive demo -->
+      <h3 style="margin-top:16px;">Flexbox Responsive Card Grid</h3>
+      <div style="display:flex; flex-wrap:wrap; gap:16px; margin-top:10px;">
+        <div class="eventCard" style="flex:1 1 200px; min-width:180px;">
+          <h3>Tech Meetup</h3>
+          <p>New York · Jun 10</p>
+          <span class="badge upcoming">Upcoming</span>
+        </div>
+        <div class="eventCard" style="flex:1 1 200px; min-width:180px;">
+          <h3>AI Conference</h3>
+          <p>Chicago · May 15</p>
+          <span class="badge completed">Completed</span>
+        </div>
+        <div class="eventCard" style="flex:1 1 200px; min-width:180px;">
+          <h3>Frontend Bootcamp</h3>
+          <p>Los Angeles · Jul 1</p>
+          <span class="badge upcoming">Upcoming</span>
+        </div>
+      </div>
+
+      <!-- CSS Grid demo -->
+      <h3 style="margin-top:20px;">CSS Grid Layout Demo</h3>
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:14px; margin-top:10px;">
+        <div style="background:#e3f2fd;padding:14px;border-radius:8px;text-align:center;">
+          <strong>Grid Cell 1</strong><br/>Events
+        </div>
+        <div style="background:#e8f5e9;padding:14px;border-radius:8px;text-align:center;">
+          <strong>Grid Cell 2</strong><br/>Speakers
+        </div>
+        <div style="background:#fff3e0;padding:14px;border-radius:8px;text-align:center;">
+          <strong>Grid Cell 3</strong><br/>Resources
+        </div>
+        <div style="background:#fce4ec;padding:14px;border-radius:8px;text-align:center;">
+          <strong>Grid Cell 4</strong><br/>Feedback
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== EXERCISE 11 ===================== -->
+    <section id="ex11">
+      <h2>Exercise 11 — Debug &amp; Test with DevTools</h2>
+      <p class="description-text">
+        To debug and test this page:
+      </p>
+      <ol class="steps-list">
+        <li>Open Chrome DevTools with <kbd>F12</kbd> or right-click → Inspect</li>
+        <li>Use the <strong>Device Toolbar</strong> (<kbd>Ctrl+Shift+M</kbd>) to simulate phones &amp; tablets</li>
+        <li>In the <strong>Elements</strong> panel, select any element and edit styles live in the Styles pane</li>
+        <li>In the <strong>Network</strong> tab, reload the page and confirm <code>styles.css</code> loads with status 200</li>
+        <li>In the <strong>Console</strong> tab, view any JS logs or CSS warnings</li>
+      </ol>
+      <script>
+        // Exercise 11: Console log for DevTools verification
+        console.log('CSS3 Exercises Page Loaded');
+        console.log('External stylesheet: styles.css');
+        console.log('Google Font: Poppins loaded via <link>');
+      </script>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <!-- Footer styles -->
+  <footer>
+    <p>&copy; 2025 Local Community Event Portal | City Council</p>
+    <p>Contact: <a href="mailto:events@city.gov">events@city.gov</a></p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>jQuery Exercises — Community Event Portal</title>
+
+  <!-- Exercise 1: jQuery via CDN -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Segoe UI',sans-serif; background:#eef2ff; color:#222; }
+    header { background:linear-gradient(135deg,#0d47a1,#1a73e8); color:white; padding:24px; text-align:center; }
+    main { max-width:900px; margin:24px auto; padding:0 16px; }
+    section { background:white; border-radius:10px; padding:24px; margin-bottom:24px; box-shadow:0 2px 8px rgba(0,0,0,0.08); }
+    h2 { color:#0d47a1; border-bottom:2px solid #1a73e8; padding-bottom:8px; margin-bottom:14px; }
+    h3 { color:#1558b0; margin:12px 0 6px; }
+    button { cursor:pointer; padding:9px 18px; border-radius:6px; border:none; background:#1a73e8; color:white; font-size:0.9rem; font-weight:600; margin:5px 4px; transition:background 0.2s; }
+    button:hover { background:#1558b0; }
+    button.red   { background:#e53935; } button.red:hover { background:#b71c1c; }
+    button.green { background:#2e7d32; } button.green:hover { background:#1b5e20; }
+    .box { width:120px; height:80px; background:#1a73e8; color:white; display:inline-flex; align-items:center; justify-content:center; border-radius:8px; margin:6px; font-weight:bold; cursor:pointer; }
+    #colorBox { width:200px; height:100px; background:white; border:2px solid #1a73e8; border-radius:8px; margin:10px 0; display:flex; align-items:center; justify-content:center; font-weight:bold; transition:background 0.3s; }
+    #divText { background:#e3f2fd; padding:16px; border-radius:8px; border:1px solid #90caf9; margin:10px 0; font-size:1rem; cursor:pointer; }
+    input[type=text] { padding:9px; border:1px solid #aaa; border-radius:6px; font-size:0.95rem; width:240px; }
+    ul#itemList { list-style:disc; padding-left:24px; margin:10px 0; }
+    ul#itemList li { padding:4px 0; color:#333; border-bottom:1px dashed #ddd; }
+    #keyInput { width:100%; padding:9px; border:1px solid #aaa; border-radius:6px; font-size:0.95rem; margin-top:6px; }
+    #keyOutput { margin-top:6px; color:#1a73e8; font-weight:bold; }
+    footer { background:#0d47a1; color:white; text-align:center; padding:16px; margin-top:20px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>jQuery Exercises — Community Event Portal</h1>
+  <!-- Exercise 1 Bonus: Hello World element -->
+  <p id="helloWorld">Hello World!</p>
+</header>
+
+<main>
+
+  <!-- ======================================================
+       EXERCISE 1: jQuery Library Inclusion
+  ====================================================== -->
+  <section id="ex1">
+    <h2>Exercise 1 — jQuery Library Inclusion</h2>
+    <p>jQuery loaded via CDN. Check the console to see the Hello World log.</p>
+    <p><strong>Method 1:</strong> CDN link in &lt;head&gt; (used on this page).</p>
+    <p><strong>Method 2:</strong> Download jquery-3.7.1.min.js locally and use <code>&lt;script src="jquery-3.7.1.min.js"&gt;</code>.</p>
+  </section>
+
+  <!-- ======================================================
+       EXERCISE 2: The $() Function
+  ====================================================== -->
+  <section id="ex2">
+    <h2>Exercise 2 — The $() Function &amp; Selecting Elements</h2>
+    <h3 id="ex2Heading">This is the H3 heading</h3>
+    <p id="ex2Para1">First paragraph — click the button below to hide me.</p>
+    <p id="ex2Para2">Second paragraph — I stay visible.</p>
+    <button id="changeTextBtn">Change H3 Text</button>
+    <button id="hidePara1Btn">Hide First Paragraph</button>
+    <button id="showPara1Btn">Show First Paragraph</button>
+  </section>
+
+  <!-- ======================================================
+       EXERCISE 3: jQuery Methods
+  ====================================================== -->
+  <section id="ex3">
+    <h2>Exercise 3 — Common jQuery Methods</h2>
+    <div class="box" id="box1">Box 1</div>
+    <div class="box" id="box2">Box 2</div>
+    <div class="box" id="box3">Box 3</div>
+    <br/>
+    <button id="hideBtn">Hide All</button>
+    <button id="showBtn">Show All</button>
+    <button id="fadeOutBtn">Fade Out</button>
+    <button id="fadeInBtn">Fade In</button>
+    <button id="toggleBtn">Toggle</button>
+    <button id="chainBtn" class="green">Chain: SlideUp → SlideDown</button>
+  </section>
+
+  <!-- ======================================================
+       EXERCISE 4: DOM Manipulation
+  ====================================================== -->
+  <section id="ex4">
+    <h2>Exercise 4 — DOM Manipulation</h2>
+    <input type="text" id="itemInput" placeholder="Enter event name..." />
+    <button id="addItemBtn">Add to List</button>
+    <button id="removeAllBtn" class="red">Remove All</button>
+    <ul id="itemList"></ul>
+  </section>
+
+  <!-- ======================================================
+       EXERCISE 5: Working with Events
+  ====================================================== -->
+  <section id="ex5">
+    <h2>Exercise 5 — Handling User Interactions</h2>
+    <button id="colorBtn">Click to turn RED</button>
+    <p style="font-size:0.85rem;color:#666;">Double-click the box to reset to white.</p>
+    <div id="colorBox">Color Box</div>
+  </section>
+
+  <!-- ======================================================
+       EXERCISE 6: Event Helpers
+  ====================================================== -->
+  <section id="ex6">
+    <h2>Exercise 6 — Mouse &amp; Keyboard Events</h2>
+
+    <h3>Div with Click / Double-Click / MouseEnter / MouseLeave</h3>
+    <div id="divText">
+      I react to mouse events! Try clicking, double-clicking, and hovering.
+    </div>
+    <p id="divEventLog" style="color:#1a73e8; font-weight:bold; min-height:22px;"></p>
+
+    <h3>Keyboard Events on Input</h3>
+    <input type="text" id="keyInput" placeholder="Type here to see key events..." />
+    <p id="keyOutput">Waiting for key press...</p>
+  </section>
+
+</main>
+
+<footer>
+  <p>&copy; 2025 Community Event Portal — jQuery Exercises</p>
+</footer>
+
+<script>
+$(document).ready(function () {
+
+  // ============================================================
+  // EXERCISE 1: Log Hello World via jQuery
+  // ============================================================
+  console.log('jQuery version:', $.fn.jquery);
+  console.log('Hello World:', $('#helloWorld').text());
+
+
+  // ============================================================
+  // EXERCISE 2: $() — Change text, hide/show paragraph
+  // ============================================================
+  $('#changeTextBtn').click(function () {
+    $('#ex2Heading').text('Heading changed by jQuery!');
+  });
+
+  $('#hidePara1Btn').click(function () {
+    $('#ex2Para1').hide();
+  });
+
+  $('#showPara1Btn').click(function () {
+    $('#ex2Para1').show();
+  });
+
+
+  // ============================================================
+  // EXERCISE 3: jQuery Methods — hide, show, fadeOut, fadeIn, toggle, chain
+  // ============================================================
+  $('#hideBtn').click(function ()    { $('.box').hide(); });
+  $('#showBtn').click(function ()    { $('.box').show(); });
+  $('#fadeOutBtn').click(function () { $('.box').fadeOut(600); });
+  $('#fadeInBtn').click(function ()  { $('.box').fadeIn(600); });
+  $('#toggleBtn').click(function ()  { $('.box').toggle(); });
+
+  // Bonus: method chaining with delay
+  $('#chainBtn').click(function () {
+    $('.box').slideUp(500).delay(1000).slideDown(500);
+  });
+
+
+  // ============================================================
+  // EXERCISE 4: DOM Manipulation — add/remove list items
+  // ============================================================
+  $('#addItemBtn').click(function () {
+    const val = $('#itemInput').val().trim();
+    if (val !== '') {
+      $('<li>').text(val).appendTo('#itemList');
+      $('#itemInput').val('').focus();
+    } else {
+      alert('Please enter an event name.');
+    }
+  });
+
+  // Allow Enter key to add item
+  $('#itemInput').keypress(function (e) {
+    if (e.which === 13) $('#addItemBtn').trigger('click');
+  });
+
+  $('#removeAllBtn').click(function () {
+    $('#itemList').empty();
+  });
+
+
+  // ============================================================
+  // EXERCISE 5: Events — click to red, dblclick to reset
+  // ============================================================
+  $('#colorBtn').click(function () {
+    $('#colorBox').css({ 'background-color': 'red', 'color': 'white' }).text('Turned RED!');
+  });
+
+  $('#colorBox').dblclick(function () {
+    $(this).css({ 'background-color': 'white', 'color': '#333' }).text('Reset to White');
+  });
+
+
+  // ============================================================
+  // EXERCISE 6: Event Helpers
+  // ============================================================
+  const $log = $('#divEventLog');
+
+  // .click()
+  $('#divText').click(function () {
+    $(this).css('background-color', '#bbdefb');
+    $log.text('click() — background turned light blue');
+  });
+
+  // .dblclick()
+  $('#divText').dblclick(function () {
+    $(this).css('background-color', '#fff9c4');
+    $log.text('dblclick() — background turned yellow');
+  });
+
+  // .mouseenter()
+  $('#divText').mouseenter(function () {
+    $(this).css('border', '2px solid #1a73e8');
+    $log.text('mouseenter() — border appeared');
+  });
+
+  // .mouseleave()
+  $('#divText').mouseleave(function () {
+    $(this).css('border', '1px solid #90caf9');
+    $log.text('mouseleave() — border reset');
+  });
+
+  // .keypress() on input field
+  $('#keyInput').keypress(function (e) {
+    const key = String.fromCharCode(e.which) || e.key;
+    $('#keyOutput').text('keypress() — Key pressed: "' + key + '" (charCode: ' + e.which + ')');
+  });
+
+  // Also show full typed value on keyup
+  $('#keyInput').keyup(function () {
+    const len = $(this).val().length;
+    $('#keyOutput').text('Characters typed so far: ' + len);
+  });
+
+});
+</script>
+</body>
+</html>
