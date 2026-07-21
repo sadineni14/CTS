@@ -1,0 +1,22 @@
+<form #productForm="ngForm" (ngSubmit)="onSubmit(productForm)">
+  <input
+    name="name"
+    [(ngModel)]="product.name"
+    #name="ngModel"
+    required
+    minlength="2"
+    placeholder="Product name" />
+  <div *ngIf="name.invalid && name.touched">Name is required (min 2 chars)</div>
+
+  <input
+    type="number"
+    name="price"
+    [(ngModel)]="product.price"
+    #price="ngModel"
+    required
+    min="0.01"
+    placeholder="Price" />
+  <div *ngIf="price.invalid && price.touched">Price must be greater than 0</div>
+
+  <button type="submit" [disabled]="productForm.invalid">Save (template-driven)</button>
+</form>

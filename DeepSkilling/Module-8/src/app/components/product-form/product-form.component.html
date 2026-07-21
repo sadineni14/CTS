@@ -1,0 +1,13 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <input formControlName="name" placeholder="Product name" />
+  <div *ngIf="form.get('name')?.invalid && form.get('name')?.touched">
+    Name is required (min 2 chars)
+  </div>
+
+  <input type="number" formControlName="price" placeholder="Price" />
+  <div *ngIf="form.get('price')?.invalid && form.get('price')?.touched">
+    Price must be greater than 0
+  </div>
+
+  <button type="submit" [disabled]="form.invalid">Save</button>
+</form>

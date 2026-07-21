@@ -1,0 +1,34 @@
+# Setting up CI/CD pipelines with GitHub Actions sub-topic
+name: Build and Test Microservices
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Restore ProductService
+        run: dotnet restore ./ProductService
+
+      - name: Build ProductService
+        run: dotnet build ./ProductService --no-restore
+
+      - name: Restore OrderService
+        run: dotnet restore ./OrderService
+
+      - name: Build OrderService
+        run: dotnet build ./OrderService --no-restore
+
+      - name: Run tests
+        run: dotnet test --no-build --verbosity normal
