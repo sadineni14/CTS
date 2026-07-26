@@ -1,0 +1,39 @@
+version: "3.9"
+
+# Demonstrates: a custom network, a named (persistent) volume, container
+# environment variables, and service-to-service DNS resolution by name -
+# the "Docker Storage", "Docker Networking", and "Container Orchestration"
+# sub-topics from this module.
+
+services:
+  product-service:
+    build: .
+    container_name: product-service
+    ports:
+      - "8080:8080"
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=db;Database=ProductsDb;User=sa;Password=${DB_PASSWORD};TrustServerCertificate=True
+    depends_on:
+      - db
+    networks:
+      - deepskilling-net
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sql-db
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "1433:1433"
+    volumes:
+      - sql-data:/var/opt/mssql
+    networks:
+      - deepskilling-net
+
+networks:
+  deepskilling-net:
+    driver: bridge
+
+volumes:
+  sql-data:
